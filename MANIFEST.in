@@ -1,0 +1,15 @@
+# Always include license and readme
+include README.md
+include LICENSE
+
+# Exclude unnecessary files
+exclude .gitignore
+exclude .git/**
+exclude examples/**
+exclude tests/**
+
+# Exclude build and cache
+exclude build/**
+exclude dist/**
+exclude *.egg-info/**
+exclude __pycache__/**

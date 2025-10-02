@@ -1,0 +1,40 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+env/
+venv/
+*.egg-info/
+
+# Build artifacts
+build/
+dist/
+*.egg
+*.egg-info/
+.eggs/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Logs and temp
+*.log
+*.tmp
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Rasterio / PyTorch cache
+.rasterio_cache/
+torch_cache/
+
+# Examples and data (not shipped in PyPI)
+examples/
+data/

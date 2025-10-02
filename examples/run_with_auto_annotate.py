@@ -1,17 +1,33 @@
 # gpu_agent_opt/examples/run_with_auto_annotate.py
 
-from src.gpu_agent_opt import KernelAgent
+from gpu_agent_opt import KernelAgent
 from auto_annotate_dino_nvtx import extract_dino_features_all
 import rasterio
-import numpy as np
+import torch
 
 
 def main(image_path):
+    # ---- Load 3 bands with rasterio ----
     with rasterio.open(image_path) as src:
-        img = np.stack([(src.read(b).astype(np.float32) - src.read(b).min()) /
-                        (src.read(b).ptp() + 1e-6) * 255
-                        for b in [3, 2, 1]], -1).astype(np.uint8)
+        bands = [src.read(b).astype("float32") for b in [3, 2, 1]]
 
+    # ---- Convert to Torch tensor (H, W, 3) ----
+    img = torch.from_numpy(
+        __import__("numpy").stack(bands, axis=-1)  # stacked H,W,3
+    )
+
+    # ---- Normalize each channel (per band min/max) ----
+    min_vals = img.amin(dim=(0, 1), keepdim=True)
+    max_vals = img.amax(dim=(0, 1), keepdim=True)
+    img = (img - min_vals) / (max_vals - min_vals + 1e-6) * 255.0
+
+    # ---- Convert to uint8 for downstream processing ----
+    img = img.to(torch.uint8)
+
+    # If you want everything on GPU already:
+    # img = img.cuda()
+
+    # ---- Run KernelAgent autotuning ----
     agent = KernelAgent(
         kernel_func=extract_dino_features_all,
         metrics=["sm_efficiency", "dram_utilization"],
@@ -21,9 +37,9 @@ def main(image_path):
     best_cfg, results = agent.autotune(
         search_space={
             "stride_frac": [0.25, 0.5, 1.0],
-            "batch_size": [128, 256, 512]
+            "batch_size": [16, 32, 64]  # safer for DINOv2
         },
-        img=img
+        img=img.numpy()  # convert back to numpy if your kernel expects numpy
     )
 
     print("✅ Best Config:", best_cfg)
