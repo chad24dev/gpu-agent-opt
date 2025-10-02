@@ -26,7 +26,7 @@ It automates the search for efficient GPU configurations (e.g. batch sizes, bloc
 ## 📦 Installation
 
 From PyPI (coming soon):
-
+https://test.pypi.org/project/gpu-agent-opt/0.1.0/
 ```bash
 pip install gpu-agent-opt
 ```
@@ -89,7 +89,6 @@ print("✅ Best Config Found:", best_cfg)
 ## 📖 Documentation
 
 Coming soon at [https://aifusion.in](https://aifusion.in) 🚀
-
 ---
 
 ## 🤝 Contributing
