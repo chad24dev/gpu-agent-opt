@@ -12,21 +12,10 @@ class NsightProfiler:
         self.metrics = metrics or ["sm_efficiency", "dram_utilization"]
         self.ncu_path = ncu_path
 
-    def evaluate(self, func, config, *args, **kwargs):
-        """
-        Runs the kernel function inside Nsight Compute profiling context.
-        For now: simple wrapper that calls function and returns dummy score.
-        Later: integrate with subprocess call to Nsight CLI.
-        """
-        # Execute kernel
-        output = func(*args, **config, **kwargs)
-
-        # TODO: Replace with actual Nsight parsing
-        # For now, simulate with "score = 1 / elapsed_time"
-        import time
-        start = time.time()
-        func(*args, **config, **kwargs)
-        elapsed = time.time() - start
-
-        score = 1.0 / max(elapsed, 1e-6)
-        return score
+    def evaluate(self, config, runtime=None, output=None):
+        # In real Nsight, you’d parse profiler logs
+        # Here: just return inverse runtime as "score"
+        if runtime is not None:
+            return 1.0 / runtime
+        else:
+            return 0.0
