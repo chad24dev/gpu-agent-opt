@@ -25,7 +25,7 @@ def main(image_path):
     img = img.to(torch.uint8)
 
     # If you want everything on GPU already:
-    # img = img.cuda()
+    img = img.cuda()
 
     # ---- Run KernelAgent autotuning ----
     agent = KernelAgent(
@@ -36,10 +36,10 @@ def main(image_path):
 
     best_cfg, results = agent.autotune(
         search_space={
-            "stride_frac": [0.25, 0.5, 1.0],
-            "batch_size": [16, 32, 64]  # safer for DINOv2
+            "stride_frac": [1.0],
+            "batch_size": [256,512,768]  # safer for DINOv2
         },
-        img=img.numpy()  # convert back to numpy if your kernel expects numpy
+        img=img.cpu().numpy()  # convert back to numpy if your kernel expects numpy
     )
 
     print("✅ Best Config:", best_cfg)
