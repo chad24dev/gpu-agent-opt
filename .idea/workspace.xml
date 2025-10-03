@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b710450-954a-46a5-92a2-e8c22d912b46" name="Changes" comment="supporting files">
-      <change afterPath="$PROJECT_DIR$/kernel_entry.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gpu_agent_opt.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/src/gpu_agent_opt.egg-info/PKG-INFO" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gpu_agent_opt.egg-info/SOURCES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/gpu_agent_opt.egg-info/SOURCES.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gpu_agent_opt.egg-info/requires.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/gpu_agent_opt.egg-info/requires.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

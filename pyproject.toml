@@ -3,20 +3,28 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gpu-agent-opt"  # <-- use hyphens for PyPI, not underscores
-version = "0.1.0"
+name = "gpu-agent-opt"  # PyPI prefers hyphens
+version = "0.1.1"
 description = "AI agent framework for GPU kernel autotuning and optimization"
 readme = "README.md"
 authors = [
     { name = "Atul Vaish", email = "admin@aifusion.in" }
 ]
-license = { text = "MIT" }  # or Apache-2.0, BSD, etc.
+license = { text = "MIT" }
 requires-python = ">=3.8"
 dependencies = [
     "numpy",
     "torch",
     "rasterio",
+    "tqdm",
+    "tabulate",
+    "scikit-optimize",
+    "cloudpickle",
+    "nvtx"
 ]
+
+[project.scripts]
+gpu-agent-opt = "gpu_agent_opt.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/intelav/gpu_agent_opt"

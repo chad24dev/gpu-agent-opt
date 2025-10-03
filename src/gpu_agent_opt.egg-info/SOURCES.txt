@@ -1,7 +1,10 @@
+LICENSE
+MANIFEST.in
 README.md
 pyproject.toml
 src/gpu_agent_opt/__init__.py
 src/gpu_agent_opt/agent.py
+src/gpu_agent_opt/cli.py
 src/gpu_agent_opt/executor.py
 src/gpu_agent_opt/generator.py
 src/gpu_agent_opt/knowledge.py
@@ -10,5 +13,6 @@ src/gpu_agent_opt/profiler.py
 src/gpu_agent_opt.egg-info/PKG-INFO
 src/gpu_agent_opt.egg-info/SOURCES.txt
 src/gpu_agent_opt.egg-info/dependency_links.txt
+src/gpu_agent_opt.egg-info/entry_points.txt
 src/gpu_agent_opt.egg-info/requires.txt
 src/gpu_agent_opt.egg-info/top_level.txt
