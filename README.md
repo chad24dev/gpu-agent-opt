@@ -62,7 +62,7 @@ The framework executes a **five-stage loop** to profile real GPU workloads:
 
 Below is a snapshot from a real profiling run on DINOv2 + SAM2:
 
-![Profiling Snapshot](https://github.com/intelav/gpu-agent-opt/blob/main/assets/profile_snapshot.png)
+![Profiling Snapshot](assets/snapshot2.png)
 
 The results are stored in:
 
