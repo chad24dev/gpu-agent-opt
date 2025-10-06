@@ -1,162 +1,161 @@
-# 🧠 **gpu-agent-opt**
+🧠 gpu-agent-opt
 
-**Unified AI Agent Framework for GPU Kernel Autotuning, Scientific Computing, and CUDA Exploration**
+Unified AI Agent Framework for GPU Kernel Profiling, Scientific Computing, and CUDA Exploration
 
-`gpu-agent-opt` is an evolving Python package designed to **orchestrate AI agents** for **Triton, CUDA, CuPy, cuDF**, and advanced GPU programming patterns — combining **automatic kernel generation**, **profiling**, and **optimization** with a knowledge-driven loop:
+gpu-agent-opt is a Python package designed to orchestrate AI-style agentic workflows for Triton, CUDA, CuPy, cuDF, and advanced GPU programming patterns — combining automatic kernel discovery, profiling, and analysis with a knowledge-driven loop:
 
-👉 **Sense → Think → Act → Learn**
+👉 Sense → Think → Act → Learn → Reflect
 
-The long-term goal is to make this a **one-stop GPU research & optimization layer**: integrating deep learning graph compilers (PyTorch Inductor / XLA), scientific computing (CuPy / cuDF), and low-level CUDA primitives (e.g., coalesced memory, warp shuffle, tensor cores) into a single **agentic optimization system**.
+The current focus is to build a one-stop GPU research & profiling layer that integrates deep learning graph compilers (PyTorch Inductor / XLA), scientific computing (CuPy / cuDF), and low-level CUDA primitives (e.g., coalesced memory, warp shuffle, tensor cores) into a single agentic profiling system.
 
----
+✨ Core Capabilities
 
-## ✨ **Core Capabilities**
+🧠 Agentic Kernel Profiler
 
-- 🧠 **AI Agent Kernel Optimizer**  
-  - Automatic search & tuning of kernel launch configurations (blockDim, gridDim, stride, etc.)  
-  - Bayesian optimization / RL-driven exploration for both Triton and CUDA kernels.
+Automatically discovers active GPU kernels during script execution using Nsight Systems.
 
-- 🧪 **Multi-Backend Support**  
-  - ✅ **Triton Kernels** (via PyTorch Inductor or custom)  
-  - ✅ **Raw CUDA kernels** (via NVRTC / PyCUDA / C++ extensions)  
-  - ✅ **CuPy & cuDF** for scientific array/dataframe computing  
-  - Future: integrate CUDA Graphs, Cooperative Groups, tensor cores, async copies, and MIG.
+Selects top kernels (based on occurrence or time) for detailed Nsight Compute profiling.
 
-- 🔬 **Profiler Integration**  
-  - Seamless wrapping of **Nsight Compute**, **Nsight Systems**, and **PyTorch profiler** for real GPU metrics (SM utilization, DRAM throughput, kernel fusion, memory stalls).
+Generates structured summary reports (JSON) with SM and DRAM efficiency metrics.
 
-- 📚 **Knowledge Base**  
-  - Store and reuse best kernel configs per GPU architecture.  
-  - Capture performance signatures across RTX, Jetson, and HPC GPUs (A100, H100, etc.).
+🧪 Multi-Backend Context
 
-- 🛰 **Target Use Cases**  
-  - Geospatial AI auto-annotation pipelines (DINOv2, SAM2, YOLO, NDWI/LBP preprocessing)  
-  - Deep learning inference/training acceleration through Inductor + custom kernels  
-  - Scientific/HPC workloads (FFT, FDTD3D, conjugate gradient, Monte Carlo, etc.)  
-  - CUDA educational benchmarking (transpose, reduction, memory hierarchy, etc.)  
-  - Edge AI autotuning for embedded GPUs.
+Triton kernels (via PyTorch Inductor or custom)
 
----
+Raw CUDA kernels (via NVRTC / PyCUDA / C++ extensions)
 
-## 🔥 **CUDA Samples Integration**
+CuPy & cuDF for scientific array/dataframe computing
 
-The agent aims to provide a **Pythonic exploration layer over all classic CUDA patterns**, using the official CUDA Samples as a baseline:
+Planned: CUDA Graphs, Cooperative Groups, Tensor Cores, async copies, MIG partitioning.
 
-- **Memory & Data Movement**:  
-  - `bandwidthTest`, `transpose` (coalesced memory), `globalToShmemAsyncCopy`, `simpleZeroCopy`, `UnifiedMemoryStreams`.
+🔬 Profiler Integration
 
-- **Computation Kernels**:  
-  - `reduction` (multi-block, warp shuffle), `scan`, `radixSortThrust`, `matrixMul`, tensor core GEMM (bf16, tf32).
+Nsight Systems for kernel discovery.
 
-- **Advanced Features**:  
-  - CUDA Graphs (`simpleCudaGraphs`, `graphMemoryFootprint`), Cooperative Groups (`binaryPartitionCG`, `shfl_scan`), Async API, stream priorities, system-wide atomics.
+Nsight Compute for profiling top kernels with selected metrics (e.g., sm__throughput, dram__throughput).
 
-- **Linear Algebra & Solvers**:  
-  - cuBLAS, cuSolver (LU, QR, Cholesky), conjugate gradient multi-GPU variants.
+Generates both per-kernel CSVs and aggregated summary.json.
 
-- **Signal & Image Processing**:  
-  - FFT (CUFFT 1D/2D/MGPU), DCT, histogram, Sobel filters, NPP routines.
+📚 Knowledge Base / Reflection
 
-- **Misc / Educational**:  
-  - `deviceQuery`, `inlinePTX`, `cudaOpenMP`, NVRTC runtime compilation, occupancy calculators.
+reflect_history.json stores efficiency trends over multiple runs.
 
-All these are being **systematically wrapped into Python interfaces** and exposed to the **KernelAgent** for exploration, profiling, and hybrid fusion with Triton / CuPy / Inductor.
+Helps identify consistently low-performing kernels and track improvements over time.
 
----
+🛰 Target Use Cases
 
-## 🧠 **Example: Autotuning a Triton or CUDA Kernel**
+Geospatial AI auto-annotation pipelines (DINOv2, SAM2, YOLO, NDWI/LBP preprocessing)
 
-```python
-from gpu_agent_opt import KernelAgent
-import cupy as cp
+Deep learning inference/training profiling through PyTorch + Nsight
 
-# Example: Autotuning a custom transpose kernel (Triton or raw CUDA)
-kernel_code = r"""
-extern "C" __global__ void transpose(float *odata, float *idata, int width, int height) {
-    __shared__ float tile[32][33]; // coalesced read + avoid bank conflicts
-    int x = blockIdx.x * 32 + threadIdx.x;
-    int y = blockIdx.y * 32 + threadIdx.y;
-    if (x < width && y < height) tile[threadIdx.y][threadIdx.x] = idata[y * width + x];
-    __syncthreads();
-    x = blockIdx.y * 32 + threadIdx.x;
-    y = blockIdx.x * 32 + threadIdx.y;
-    if (x < height && y < width) odata[y * height + x] = tile[threadIdx.x][threadIdx.y];
-}
-"""
+Scientific/HPC workloads (FFT, FDTD3D, conjugate gradient, Monte Carlo, etc.)
 
-agent = KernelAgent(kernel_src=kernel_code, backend="cuda")
-data = cp.random.rand(1024, 1024).astype(cp.float32)
-best_cfg, results = agent.autotune(
-    search_space={"block_size": [16, 32], "grid_size": [32, 64]},
-    input=data
-)
-print(best_cfg)
-```
+CUDA educational benchmarking (transpose, reduction, memory hierarchy, etc.)
 
----
+Embedded GPU pipelines (Jetson Orin / RB5).
 
-## 🧪 **Scientific + DL Interoperability**
+📊 🧠 Agentic Profiling Snapshot
 
-- CuPy / cuDF kernels can be **fused with Triton / CUDA kernels** in the same agent pipeline.  
-- PyTorch Inductor graphs can be **partially compiled** and partially replaced by hand-tuned kernels.  
-- Target: seamlessly combine high-level deep learning graphs with low-level HPC kernels.
+The framework executes a five-stage loop to profile real GPU workloads:
 
----
+Sense → Discover kernels
+Think → Select top kernels
+Act → Run Nsight Compute on selected kernels
+Learn → Analyze & classify bottlenecks
+Reflect → Track efficiency trends over runs
 
-## 📦 Installation
+## 📊 Example output from profiling a geospatial annotation pipeline
 
-Coming soon on PyPI:  
-👉 [https://test.pypi.org/project/gpu-agent-opt/](https://test.pypi.org/project/gpu-agent-opt/0.1.0/)
+Below is a snapshot from a real profiling run on DINOv2 + SAM2 annotation pipeline:
 
-```bash
+![Profiling Snapshot](assets/profile_snapshot.png)
+These metrics are stored in:
+
+runs/profile_logs/.../summary.json → per-run aggregated metrics
+
+reflect_history.json → longitudinal trend tracking (e.g., average SM & DRAM efficiency per run)
+
+This forms the foundation for future agentic steps, such as:
+
+Replacing inefficient PyTorch kernels with custom CUDA/Triton implementations
+
+Adjusting launch configurations or fusing operators
+
+Triggering code generation agents
+
+🔥 CUDA Samples Integration
+
+The agent aims to provide a Pythonic exploration layer over classic CUDA patterns, using the official CUDA Samples as a baseline:
+
+Memory & Data Movement: bandwidthTest, transpose, globalToShmemAsyncCopy, etc.
+
+Computation Kernels: reduction, scan, GEMM tensor core examples.
+
+Advanced Features: CUDA Graphs, Cooperative Groups, Async API.
+
+Linear Algebra & Solvers: cuBLAS, cuSolver.
+
+Signal & Image Processing: FFT (CUFFT), DCT, NPP.
+
+Misc: deviceQuery, inlinePTX, cudaOpenMP, NVRTC runtime compilation.
+
+All these are being wrapped progressively into Python interfaces and integrated with the profiler for analysis and future optimization.
+
+🧪 Scientific + DL Interoperability
+
+CuPy / cuDF kernels can be profiled alongside Triton / CUDA kernels in the same pipeline.
+
+PyTorch Inductor graphs can be analyzed to identify candidate subgraphs for replacement.
+
+Target: seamlessly combine high-level deep learning graphs with low-level profiling data.
+
+📦 Installation
+
+👉 https://test.pypi.org/project/gpu-agent-opt/
+
 pip install gpu-agent-opt
-```
+
 
 Development install:
-```bash
-git clone https://github.com/yourusername/gpu_agent_opt.git
+
+git clone https://github.com/intelav/gpu_agent_opt.git
 cd gpu_agent_opt
 pip install -e .
-```
 
----
+📊 Roadmap
 
-## 📊 Roadmap
+✅ Triton kernel detection through Inductor
 
-- ✅ Triton kernel integration  
-- ✅ PyTorch Inductor graph fusion exploration  
-- 🚧 CuPy / cuDF integration for scientific computation  
-- 🚧 CUDA Samples porting (transpose, reduction, etc.)  
-- 🚧 Tensor Core autotuning (bf16, tf32)  
-- 🚧 Multi-GPU / MIG profiling and scheduling  
-- 🚧 Web dashboard for kernel search spaces & profiling results
+✅ Nsight Systems + Compute integration
 
----
+✅ Summary & Reflect history JSON generation
 
-## 🧪 Tutorials (Coming Soon)
+🚧 CuPy / cuDF scientific profiling
 
-| Tutorial | Description |
-|----------|-------------|
-| Transpose Coalescing | Explore memory coalescing & shared memory tiling |
-| Reduction with Warp Shuffle | Implement warp-level primitives & tune performance |
-| Tensor Core Autotuning | Use BF16/TF32 GEMM samples to autotune tensor cores |
-| Hybrid Graph Fusion | Combine Inductor subgraphs with custom Triton kernels |
-| Scientific Kernels | FFT, DCT, Monte Carlo, conjugate gradient solvers |
+🚧 CUDA Samples wrapping
 
----
+🚧 Tensor Core profiling
 
-## 🤝 Contributing
+🚧 Multi-GPU / MIG profiling
+
+🚧 Autotuning (Triton / CUDA) — future
+
+🚧 Web dashboard for kernel search spaces & profiling results
+
+🤝 Contributing
 
 Contributions are very welcome, especially for:
-- Wrapping additional CUDA samples into Python bindings
-- Adding new search strategies (RL, evolutionary)
-- Expanding scientific kernel coverage (FFT, solvers, etc.)
-- Profiling backends (Nsight Compute scripting, CUPTI)
 
-👉 Open issues & PRs on [GitHub](https://github.com/yourusername/gpu_agent_opt)
+Wrapping additional CUDA samples into Python bindings
 
----
+Expanding scientific kernel coverage (FFT, solvers, etc.)
 
-## 📜 License
+Profiling backends (CUPTI integration, Nsight scripting)
 
-MIT License — see [LICENSE](LICENSE)
+Building autotuning hooks (Triton, CUDA extensions)
+
+👉 Open issues & PRs on GitHub
+
+📜 License
+
+MIT License — see LICENSE
